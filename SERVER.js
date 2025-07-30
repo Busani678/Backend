@@ -19,8 +19,12 @@ app.post('/charge', async (req, res) => {
     return res.status(400).json({ error: "Missing token or amount." });
   }
 
+  console.log("Received token:", token);
+console.log("Amount in cents:", amountInCents);
+console.log("Charge result from Yoco:", result);
+
   try {
-    const response = await fetch('https://online.yoco.com/v1/charges', {
+    const response = await fetch('https://backend-zrq5.onrender.com/charges', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +52,12 @@ app.post('/charge', async (req, res) => {
   }
 });
 
-const PORT = 3000;
+// const PORT = 3000;
+// app.listen(PORT, () => {
+//   console.log(`🚀 Backend running on https://localhost:${PORT}`);
+// });
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Backend running on https://localhost:${PORT}`);
+  console.log(`🚀 Backend running on port ${PORT}`);
 });
